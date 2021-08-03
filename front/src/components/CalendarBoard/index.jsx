@@ -1,58 +1,39 @@
 import React from "react";
-import { GridList } from "@material-ui/core";
-
+import { GridList, Typography } from "@material-ui/core";
+import CalendarElements from "../CalendarElements";
+import { createCalendar } from "../../services/calendar";
 import * as styles from "./style.css";
 
-const calendar = [
-  "29",
-  "30",
-  "10月1日",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "11",
-  "12",
-  "13",
-  "14",
-  "15",
-  "16",
-  "17",
-  "18",
-  "19",
-  "20",
-  "21",
-  "22",
-  "23",
-  "24",
-  "25",
-  "26",
-  "27",
-  "28",
-  "29",
-  "30",
-  "31",
-  "11月1日",
-  "2"
-];
+const calendar = createCalendar();
+
+const days = ["日", "月", "火", "水", "木", "金", "土"];
 
 const CalendarBoard = () => {
   return (
     <div className={styles.container}>
-      <GridList className={styles.grid} cols={7} spacing={0} cellHeight="auto">
-      {calendar.map(c => (
-        <li>
-          <div className={styles.element}>{c}</div>
-        </li>
-      ))}
+      <GridList cellHeight="auto" className={styles.grid} cols={7} spacing={0}>
+        {days.map(d => (
+          <li key={d}>
+            <Typography
+              className={styles.days}
+              color="textSecondary"
+              align="center"
+              variant="caption"
+              component="div"
+            >
+              {d}
+            </Typography>
+          </li>
+        ))}
+        {calendar.map(c => (
+          <li key={c.toISOString()}>
+            <CalendarElements day={c} />
+          </li>
+        ))}
       </GridList>
     </div>
   );
 };
+
 
 export default CalendarBoard;
