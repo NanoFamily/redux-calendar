@@ -5,7 +5,7 @@ import * as styles from "./style.css";
 
 const days = ["日", "月", "火", "水", "木", "金", "土"];
 
-const CalendarBoard = ({ calendar }) => {
+const CalendarBoard = ({ calendar, month }) => {
   console.log(calendar);
   
   return (
@@ -26,7 +26,7 @@ const CalendarBoard = ({ calendar }) => {
         ))}
         {calendar.map(c => (
           <li key={c.toISOString()}>
-            <CalendarElements day={c} />
+            <CalendarElements day={c} month={month} />
           </li>
         ))}
       </GridList>

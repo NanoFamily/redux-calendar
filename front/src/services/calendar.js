@@ -1,5 +1,20 @@
 import dayjs from "dayjs";
 
+export const getNextMonth = month => {
+  const day = getMonth(month).add(1, "month");
+  return formatMonth(day);
+};
+
+export const getPreviousMonth = month => {
+  const day = getMonth(month).add(-1, "month");
+  return formatMonth(day);
+};
+
+export const formatMonth = day => ({
+  month: day.month() + 1,
+  year: day.year()
+});
+
 export const createCalendar = month => {
   // 今月の最初の日を追加
   const firstDay = getMonth(month);
