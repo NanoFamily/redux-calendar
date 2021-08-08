@@ -12,9 +12,10 @@ import "dayjs/locale/ja";
 import rootReducer from "./redux/rootReducer";
 import Navigation from "./components/Navigation/container";
 
-import DayUtils from "@date-io/dayjs";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import AddScheduleDialog from "./components/AddScheduleDialog/container";
+
 import DayjsUtils from "@date-io/dayjs";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 
 dayjs.locale("ja");
@@ -27,6 +28,7 @@ const App = () => (
     <MuiPickersUtilsProvider utils={DayjsUtils}>
       <Navigation />
       <CalendarBoard />
+      <AddScheduleDialog />
     </MuiPickersUtilsProvider>
   </Provider>
 );
