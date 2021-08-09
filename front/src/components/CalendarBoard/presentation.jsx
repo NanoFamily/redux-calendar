@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { GridList, Typography } from "@material-ui/core";
 import CalendarElements from "../CalendarElements";
 import * as styles from "./style.css";
 
 const days = ["日", "月", "火", "水", "木", "金", "土"];
 
-const CalendarBoard = ({ calendar, month, openAddScheduleDialog }) => {
-  console.log(calendar);
+const CalendarBoard = ({ 
+  calendar, 
+  month, 
+  openAddScheduleDialog,
+  openCurrentScheduleDialog,
+  fetchSchedule
+}) => {
+  useEffect(() => {
+    fetchSchedule();
+  },[]);
   
   return (
     <div className={styles.container}>
@@ -24,12 +32,17 @@ const CalendarBoard = ({ calendar, month, openAddScheduleDialog }) => {
             </Typography>
           </li>
         ))}
-        {calendar.map(c => (
+        {calendar.map(({ date, schedules }) => (
           <li 
-            key={c.toISOString()} 
-            onClick={() => openAddScheduleDialog(c)}
+            key={date.toISOString()} 
+            onClick={() => openAddScheduleDialog(date)}
           >
-            <CalendarElements day={c} month={month} />
+            <CalendarElements 
+              day={date} 
+              month={month} 
+              schedules={schedules} 
+              onClickSchedule={openCurrentScheduleDialog}
+            />
           </li>
         ))}
       </GridList>
